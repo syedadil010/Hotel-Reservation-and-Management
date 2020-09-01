@@ -1,0 +1,1 @@
+Use this folder to store other resources (like html files for example).

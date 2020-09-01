@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:replace="head :: head"></div>
+<body>
+<div th:replace="navbar :: navbar"></div>
+<div th:replace="bodash :: bodash"></div>
+<div class="container">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+            	<h1 class="section-heading"><span class="glyphicon glyphicon-wrench" aria-hidden="true"></span> My Services</h1>
+                <div th:replace="flash :: flash"></div>
+                <table class="table table-striped">
+                    <tr>
+                        <th th:each="cell : ${tableHeader}" th:text="${cell.text}"></th>
+                    </tr>
+                    <tr th:each="row : ${table}">
+                        <td th:each="cell : ${row.cells}">
+                            <span th:text="${cell.text}"></span>
+                        </td>
+                        <td>
+                            <a th:href="@{/businessowner/service/cancel/} + ${row.id}">Remove</a>
+                        </td>
+
+                    </tr>
+                </table>
+                <a th:href="@{/businessowner/dashboard}" class="btn btn-default">Back</a>
+                <a th:href="@{/businessowner/service/add}" class="btn btn-success">Add New Service</a>
+            </div>
+        </div>
+    </div>
+
+</div>
+<div th:replace="footer :: footer"></div>
+</body>
+</html>

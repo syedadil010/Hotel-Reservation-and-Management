@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:replace="head :: head"></div>
+<body>
+<div th:replace="navbar :: navbar"></div>
+<div class="jumbotron jumbo-landing">
+    <div class="container">
+        <div class="row">
+            <h2>Customer Dashboard</h2>
+            <h5>Welcome, <span class="logged-in-details text-muted" th:text="${customer.firstName}"></span></h5>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div th:replace="flash :: flash"></div>
+    <div class="row">
+        <div class="col-md-4">
+            <form method="POST" action="/availability/view">
+                <div class="form-group">
+                    <div class="form-group">
+                        <label for="business">Choose a business to shop with</label>
+                        <select class="form-control" id="business" name="business">
+                            <option
+                                    th:each="business: ${businesses}"
+                                    th:value="${business.id}"
+                                    th:text="${business.businessName}"
+                            ></option>
+                        </select>
+                    </div>
+                    <input type="submit" class="btn btn-primary" value="Start New Booking"/>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <a class="btn btn-default" th:href="@{/customer/history}">View History</a>
+        </div>
+    </div>
+    <div>
+        <h1 class="lead">My Bookings</h1>
+        <table class="table table-striped rwd-table">
+            <tr>
+                <th>Business</th>
+                <th>Date</th>
+                <th>Employee</th>
+                <th>Service</th>
+                <th>Time</th>
+                <th>Duration</th>
+                <th>Cancel</th>
+            </tr>
+            <tr th:each="row : ${table}">
+                <td th:attr="data-th=${cell.columnName}"  th:each="cell : ${row.cells}">
+                    <span th:text="${cell.text}"></span>
+                </td>
+                <td>
+                    <a onclick="return confirm('Are you sure you want to delete this booking?');" th:href="'/booking/cancel/'+${row.id}">Cancel</a>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+</div>
+<div th:replace="footer :: footer"></div>
+</body>
+</html>

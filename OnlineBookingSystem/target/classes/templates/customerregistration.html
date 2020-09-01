@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<div th:replace="head :: head"></div>
+
+<body>
+	<div class="container-fluid">
+		<div th:replace="flash :: flash"></div>
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title">Customer Registration</h4>
+				</div>
+				<div class="modal-body">
+					<div class="row">
+						<div class="col-md-10 col-md-offset-1">
+							<div class="well">
+								<form method="post" onsubmit="return validateCustomerRegistration()">
+									<p>
+					              		<label>First Name</label>
+					              		<input type="text" class="form-control" name="firstName" pattern="^[a-zA-Z]{1,50}$" title="Must be letters only and less than 50 letters long" required="required"/>
+						          	</p>
+						          	<p>
+					              		<label>Last Name</label>
+					              		<input type="text" class="form-control" name="lastName" pattern="^[a-zA-Z]{1,50}$" title="Must be letters only and less than 50 letters long" required="required"/>
+						          	</p>
+						          	<p>
+					              		<label>email</label>
+					              		<input type="email" class="form-control" name="email" required="required"/>
+						          	</p>
+						          	<p>
+					              		<label>Username</label>
+					              		<input type="text" class="form-control" name="username" pattern="^[a-zA-Z0-9]{5,}$" required="required"/>
+						          	</p>
+						          	<p>
+					              		<label>Password</label>
+					              		<input type="password" class="form-control" id="password" name="password" pattern="^[a-zA-Z0-9]{8,50}$" title="must be letters and numbers only and be atleast 8 chracters long" required="required"/>
+						          	</p>
+                                    <p>
+                                        <label>Confirm Password</label>
+                                        <input type="password" class="form-control" id="confirm" name="confirm" pattern="^[a-zA-Z0-9]{8,50}$" required="required" onkeyup="validateConfirmPassword()"/>
+                                        <small id="confirm-error" class="hidden" >Does not match password</small>
+                                    </p>
+                                    <p>
+						          		<input type="submit" value="register" class="btn btn-success btn-block"/>
+						          	</p>
+						          	<p>
+						          		<a th:href="@{/}" class="btn btn-info btn-block">Already have an account? Click here to log in</a>
+						          	</p>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div th:replace="footer :: footer"></div>
+</body>
+<script type="text/javascript" src="/js/validation.js"></script>
+</html>

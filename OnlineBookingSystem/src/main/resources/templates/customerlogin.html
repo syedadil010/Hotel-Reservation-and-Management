@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:replace="head :: head"></div>
+<body>
+	<div class="container-fluid">
+		<div class="jumbotron container">
+			<form method="post" class="form">
+				<h2>Customer Login</h2>
+				<p>
+					<label>Email</label>
+					<input type="text" class="form-control" name="email"/>
+				</p>
+				<p>
+					<label>Password</label>
+					<input type="password" class="form-control" name="password"/>
+				</p>
+				<p>
+					<input type="submit" value="login" class="btn btn-success"/>
+				</p>
+			</form>
+		</div>
+	</div>
+	<div th:replace="footer :: footer"></div>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:replace="head :: head"></div>
+<body>
+<div th:replace="navbar :: navbar"></div>
+<div th:replace="bodash :: bodash"></div>
+<div class="container">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+            	<h1 class="section-heading">Employees</h1>
+            	<div th:replace="flash :: flash"></div>
+                <p th:if="${table.size()} == 0">
+                    There are currently no employees.
+                </p>
+                <table th:unless="${table.size()} == 0" class="table table-striped">
+                    <tr>
+                        <th th:each="cell : ${tableHeader}" th:text="${cell.text}"></th>
+                        <th></th>
+                    </tr>
+                    <tr th:each="row : ${table}">
+                        <td>
+                            <span th:text="${row.heading}"></span>
+                        </td>
+                        <td th:each="cell : ${row.cells}">
+                            <span th:if="${cell.hasValue}"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></span>
+                        </td>
+                        <td>
+                            <a th:href="@{/businessowner/employee/edit/} + ${row.id}">Edit</a>
+                        </td>
+                        <td>
+                        	<a th:href="@{/businessowner/employee/remove/} + ${row.id}" onclick="return confirm('Are you sure you want to remove this employee?')">Remove</a>
+                        </td>
+                    </tr>
+                </table>
+                <a th:href="@{/businessowner/dashboard}" class="btn btn-default">Back</a>
+                <a th:href="@{/businessowner/employee/add}" class="btn btn-success">Add New Employee</a>
+            </div>
+        </div>
+    </div>
+
+</div>
+<div th:replace="footer :: footer"></div>
+</body>
+</html>

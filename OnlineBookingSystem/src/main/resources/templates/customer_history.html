@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:replace="head :: head"></div>
+<body>
+<div th:replace="navbar :: navbar"></div>
+<div class="container">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <h1 class="section-heading">My Booking History</h1>
+            </div>
+        </div>
+        <div th:replace="flash :: flash"></div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <table class="table table-striped rwd-table">
+                    <tr>
+                        <th>Business</th>
+                        <th>Date</th>
+                        <th>Employee</th>
+                        <th>Service</th>
+                        <th>Time</th>
+                        <th>Duration</th>
+                    </tr>
+                    <tr th:each="row : ${historyTable}">
+                        <td th:attr="data-th=${cell.columnName}"  th:each="cell : ${row.cells}">
+                            <span th:text="${cell.text}"></span>
+                        </td>
+                    </tr>
+                </table>
+                <a th:href="@{/customer/dashboard}" class="btn btn-default">Back</a>
+            </div>
+        </div>
+    </div>
+
+</div>
+<div th:replace="footer :: footer"></div>
+</body>
+</html>

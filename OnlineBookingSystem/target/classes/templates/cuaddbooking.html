@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:replace="head :: head"></div>
+<body>
+<div class="container-fluid">
+    <div th:replace="flash :: flash"></div>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Add New Booking</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-10 col-md-offset-1">
+                        <form method="post">
+                            <div class="well">
+                                <h4>Confirm your booking</h4>
+                                <p th:text="'Employee:' + ${employee.name}"></p>
+                                <p th:text="'Service:' + ${service.serviceName}"></p>
+                                <p th:text="'Date:' + ${date}"></p>
+                                <p th:text="'Time:' + ${time}"></p>
+                                <p th:text="'Duration:' + ${duration}"></p>
+                            </div>
+                            <div class="col-md-6">
+                                <p>
+                                    <input type="submit" value="Confirm" class="btn btn-success btn-block"/>
+                                </p>
+                            </div>
+                            <div class="col-md-6">
+                                <p>
+                                    <a href="/customer/dashboard" class="btn btn-warning btn-block">Cancel</a>
+                                </p>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div th:replace="footer :: footer"></div>
+</body>
+</html>

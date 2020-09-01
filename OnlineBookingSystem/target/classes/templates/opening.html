@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:replace="head :: head"></div>
+<body>
+<div th:replace="navbar :: navbar"></div>
+<div th:replace="bodash :: bodash"></div>
+<div class="container">
+    <div th:replace="flash :: flash"></div>
+	<form method="POST">
+	    <table class="table table-striped">
+	        <tr>
+	            <th th:each="cell : ${tableHeader.headers}" th:text="${cell.text}"></th>
+	        </tr>
+	        <tr th:each="row : ${table}">
+	            <td th:text="${row.heading}"></td>
+	            <td th:each="cell : ${row.cells}">
+	                <input th:if="${cell.checked}" type="checkbox" th:name="${cell.name}" th:value="${cell.value}" checked="true"/>
+	                <input th:unless="${cell.checked}" type="checkbox" th:name="${cell.name}" th:value="${cell.value}"/>
+	                <span th:text="${cell.text}"></span>
+	            </td>
+	        </tr>
+	    </table>
+	    <input type="submit" value="Update Opening Hours" class="btn btn-success"/>
+	    <a href="/businessowner/dashboard" class="btn btn-default">Back</a>
+	</form>
+</div>
+<div th:replace="footer :: footer"></div>
+</body>
+</html>

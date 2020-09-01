@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<div th:replace="head :: head"></div>
+
+<body>
+<div class="row">
+    <nav class="navbar navbar-inverse">
+        <div class="container">
+            <a class="navbar-brand" href="/dashboard">
+                OBS
+            </a>
+        </div>
+    </nav>
+</div>
+<div class="container-fluid">
+    <div th:replace="flash :: flash"></div>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Business Setup</h4>
+                <p>Fill in the following form to get started.</p>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-10 col-md-offset-1">
+                        <div class="well">
+                            <form method="post" action="/setup/account" enctype="multipart/form-data">
+                                <p>
+                                    <label>Your Name</label>
+                                    <input type="text" class="form-control" name="businessOwnerName" pattern="^[a-zA-Z ]{1,50}$" title="Must be letters only and less than 50 letters long" required="required"/>
+                                </p>
+                                <p>
+                                    <label>Business Name</label>
+                                    <input type="text" class="form-control" name="businessName" pattern="^[a-zA-Z ,.!']{1,50}$" title="Must be letters only and less than 50 letters long" required="required"/>
+                                </p>
+                                <p>
+                                    <label>Business tagline/slogan</label>
+                                    <input type="text" class="form-control" name="tagline" pattern="^[a-zA-Z ,.!']{1,150}$" title="Must be letters only and less than 50 letters long" required="required"/>
+                                </p>
+                                <p>
+                                    <label>Phone</label>
+                                    <input type="text" class="form-control" name="phone" pattern="^([+]61([ ]{0,1}[0-9]{3}){3})|([0-9]{4}([ ]{0,1}[0-9]{3}){2})$" title="Must be an australian phone number" required="required"/>
+                                </p>
+                                <p>
+                                    <label>Address</label>
+                                    <input type="text" class="form-control" name="address" pattern="^[a-zA-Z0-9, ]+$" title="Must be letters only and less than 50 letters long" required="required"/>
+                                </p>
+                                <p>
+                                    <label>Username</label>
+                                    <input type="text" class="form-control" name="username" pattern="^[a-zA-Z0-9]{5,}$" required="required"/>
+                                </p>
+                                <p>
+                                    <label>Password</label>
+                                    <input type="password" class="form-control" id="password" name="password" pattern="^[a-zA-Z0-9]{8,50}$" title="must be letters and numbers only and be atleast 8 chracters long" required="required"/>
+                                </p>
+                                <p>
+                                    <label>Confirm Password</label>
+                                    <input type="password" class="form-control" id="confirm" name="confirm" pattern="^[a-zA-Z0-9]{8,50}$" required="required" onkeyup="validateConfirmPassword()"/>
+                                    <small id="confirm-error" class="hidden" >Does not match password</small>
+                                </p>
+                                <p>
+                                    <label>Theme Colour</label>
+                                    <input type="color" class="form-control" id="color" name="businessColor"/>
+                                </p>
+                                <p>
+                                    <label>Business Logo</label>
+                                    <input type="file" name="businessLogo" accept="image/png"/>
+                                </p>
+                                <p>
+                                    <label>Business Banner</label>
+                                    <input type="file" name="businessBanner" accept="image/png"/>
+                                </p>
+                                <p>
+                                    <input type="submit" value="Get Started" class="btn btn-success btn-block"/>
+                                </p>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div th:replace="footer :: footer"></div>
+</body>
+<script type="text/javascript" src="/js/validation.js"></script>
+</html>

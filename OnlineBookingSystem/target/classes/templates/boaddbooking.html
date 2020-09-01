@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:replace="head :: head"></div>
+<body>
+<div class="container-fluid">
+    <div th:replace="flash :: flash"></div>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Add New Booking</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-10 col-md-offset-1">
+                        <div class="well">
+                            <form method="post">
+                                <p>
+                                    <label for="customer">Customer</label>
+                                    <select id="customer" name="customer">
+                                        <option th:each="customer : ${customers}"
+                                                th:text="${customer.firstName} + ' ' + ${customer.lastName}"
+                                                th:value="${customer.id}"></option>
+                                    </select>
+                                </p>
+                                <p>
+                                    <label for="service">Service</label>
+                                    <select id="service" name="service">
+                                        <option th:each="service : ${services}"
+                                                th:text="${service.serviceName}"
+                                                th:value="${service.id}"></option>
+                                    </select>
+                                </p>
+                                <p>
+                                    <label for="employee">Employee</label>
+                                    <label th:text="${employee.name}"></label>
+                                    <input type="hidden" name="employee" id="employee" th:value="${employee.id}"/>
+                                </p>
+                                <p>
+                                    <label for="date">Date</label>
+                                    <input id="date" type="Date" class="form-control" name="date" required="required"
+                                           th:value="${dateString}"/>
+                                </p>
+                                <p>
+                                    <label for="startHour">Start Time</label><label for="startMin"></label>
+                                    <input id="startHour" type="number" name="startHour"
+                                           required="required"
+                                           step="1" max="23" min="0" th:value="${startHour}"/>
+                                    :
+                                    <input id="startMin" type="number" name="startMin"
+                                           required="required"
+                                           step="30" max="30" min="0" th:value="${startMin}"/>
+                                </p>
+                                <p>
+                                    <input type="submit" value="Add Booking" class="btn btn-success btn-block"/>
+                                </p>
+                                <p>
+                                    <a href="/businessowner/dashboard" class="btn btn-info btn-block">Back</a>
+                                </p>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div th:replace="footer :: footer"></div>
+</body>
+</html>

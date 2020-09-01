@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:replace="head :: head"></div>
+<body>
+	<div th:replace="navbar :: navbar"></div>
+	<div class="container-fluid">
+        <div class="container">
+            <div class="row">
+                <h3>Select your employees and services</h3>
+                <form method="POST">
+                    <div th:if="${selectedServiceId == -1 and tableisvisible == false}">
+                        <div class="form-group col-md-4">
+                            <label for="service">Services: </label>
+                            <select class="form-control" id="service" name="selectedService">
+                                <option th:each="service : ${services}"
+                                        th:text="${service.text}"
+                                        th:value="${service.value}"
+                                        th:selected="${service.selected}"></option>
+                            </select>
+                        </div>
+                    </div>
+                    <div th:if="${selectedServiceId != -1 and tableisvisible == false}">
+                        <div class="form-group col-md-4">
+                            <label for="service">Services: </label>
+                            <select class="form-control" id="service" name="selectedService">
+                                <option th:each="service : ${services}"
+                                        th:if="${service.selected}"
+                                        th:text="${service.text}"
+                                        th:value="${service.value}"
+                                        th:selected="${service.selected}"></option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="employee">Employee: </label>
+                            <select class="form-control" id="employee" name="selectedEmployee">
+                                <option
+                                        th:each="employee : ${employees}"
+                                        th:text="${employee.text}"
+                                        th:value="${employee.value}"
+                                        th:selected="${employee.selected}">
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                    <input type="hidden" name="business" th:value="${business}"/>
+                    <div class="form-group col-md-2">
+                        <label style="visibility:hidden" for="service">Search</label>
+                        <input class="btn btn-success form-control" type="submit" value="Search"/>
+                    </div>
+                </form>
+            </div>
+            <div class="row">
+            <div th:if="${selectedEmployeeId != -1}">
+                <div th:if="${selectedServiceId != -1}">
+                    <h4>Current Availabilities for</h4>
+                    <h4>
+                        <span class="booking-choice" th:text="${selectedservice}"></span>
+                        with
+                        <span class="booking-choice" th:text="${selectedemployee}"></span>
+                    </h4>
+                    <table class="table table-striped">
+                        <tr>
+                            <th th:each="cell : ${tableHeader}" th:text="${cell.text}"></th>
+                        </tr>
+                        <tr th:each="row : ${table}">
+                            <td th:text="${row.heading}"></td>
+                            <td th:each="cell : ${row.cells}" th:class="${cell.text}">
+                                <a th:if="${cell.href}" th:href="${cell.href}" th:text="${cell.text}"></a>
+                                <span th:unless="${cell.href}" th:text="${cell.text}"></span>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <br/>
+            <a href="/customer/dashboard">Return to Dashboard</a>
+            </div>
+		</div>
+	</div>
+    <div th:replace="footer :: footer"></div>
+</body>
+</html>

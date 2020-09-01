@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<div th:replace="head :: head"></div>
+<body class="landing">
+<div class="row" th:fragment="navbar">
+    <nav class="navbar navbar-inverse theme">
+        <div class="container">
+                <a href="/dashboard">
+                    <div class="customlogo">
+                    </div>
+                </a>
+            <div class="login-group">
+                <a th:href="@{/login}" class="btn btn-warning btn-block">
+                    <span class="glyphicon glyphicon-log-in"></span>
+                    Login
+                </a>
+            </div>
+        </div>
+    </nav>
+</div>
+
+<div class="jumbotron jumbo-landing">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-7 lead-text">
+                <h1 id="jumbo-title">Welcome to
+                    <span th:each="owner : ${ownerList}">
+                        <span th:text="${owner.businessName}">
+                            <!--business name injected here-->
+                        </span>
+                    </span>
+                </h1>
+                <h3 class="jumbo-subtitle">
+                    <span th:each="owner : ${ownerList}">
+                        <span th:text="${owner.tagline}">
+                            <!--tagline injected here-->
+                        </span>
+                    </span>
+                </h3>
+            </div>
+            <div class="col-sm-4 col-sm-offset-1 lead-text">
+                <p class="lead">Bookings made easy with 1-step sign up. Join for free</p>
+                <div>
+                    <form th:action="@{/register/customer}" method="post" onsubmit="return validateCustomerRegistration()">
+                        <input type="text" placeholder="First name" class="form-control signup-field first-name" name="firstName" pattern="^[a-zA-Z]{1,50}$" title="Must be letters only and less than 50 letters long" required="required"/>
+                        <input type="text" placeholder="Surname" class="form-control signup-field last-name" name="lastName" pattern="^[a-zA-Z]{1,50}$" title="Must be letters only and less than 50 letters long" required="required"/>
+                        <input type="email" placeholder="Email address" class="form-control signup-field" name="email" required="required"/>
+                        <input type="text" placeholder="Username" class="form-control signup-field" name="username" pattern="^[a-zA-Z0-9]{5,}$" required="required"/>
+                        <input type="password" placeholder="Password" class="form-control signup-field" id="password" name="password" pattern="^[a-zA-Z0-9]{8,50}$" title="must be letters and numbers only and be atleast 8 chracters long" required="required"/>
+                        <input type="password" placeholder="Confirm password" class="form-control signup-field" id="confirm" name="confirm" pattern="^[a-zA-Z0-9]{8,50}$" required="required" onkeyup="validateConfirmPassword()"/>
+                        <small id="confirm-error" class="hidden" >Does not match password</small>
+                        <input type="submit" value="Sign up" class="btn btn-success btn-block"/>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="business-landing">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <p class="business-landing-tagline">Are you a business owner? Join our growing network, <a href="#">Register with OBS</a> today</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <img class="service-circle" th:src="@{/images/spanner.png}"/>
+                <img class="service-circle" th:src="@{/images/web.png}"/>
+                <img class="service-circle" th:src="@{/images/paint.png}"/>
+                <img class="service-circle" th:src="@{/images/pencil.png}"/>
+                <img class="service-circle" th:src="@{/images/shopping.png}"/>
+                <img class="service-circle" th:src="@{/images/shovel.png}"/>
+                <img class="service-circle" th:src="@{/images/camera.png}"/>
+            </div>
+        </div>
+    </div>
+</div>
+<div th:replace="footer :: footer"></div>
+</body>
+<script type="text/javascript" th:src="@{/js/validation.js}"></script>
+</html>

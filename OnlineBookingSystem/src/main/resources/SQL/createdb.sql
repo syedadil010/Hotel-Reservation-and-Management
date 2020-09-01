@@ -1,0 +1,97 @@
+CREATE TABLE IF NOT EXISTS customer (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  firstName TEXT NOT NULL,
+  lastName TEXT NOT NULL,
+  username TEXT UNIQUE NOT NULL,
+  password TEXT NOT NULL,
+  email TEXT NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS businessOwner (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  businessOwnerName TEXT NOT NULL,
+  businessName TEXT NOT NULL,
+  username TEXT NOT NULL UNIQUE,
+  password TEXT NOT NULL,
+  phone TEXT NOT NULL,
+  address TEXT NOT NULL,
+  tagline TEXT NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS employee (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  business int NOT NULL,
+  name TEXT UNIQUE NOT NULL,
+  email TEXT NOT NULL,
+  phone TEXT NOT NULL,
+  address TEXT NOT NULL,
+  deleted INTEGER DEFAULT 0,
+  FOREIGN KEY (business) REFERENCES businessOwner(id)
+);
+
+CREATE TABLE IF NOT EXISTS shift (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  business INTEGER NOT NULL DEFAULT 1,
+  name TEXT NOT NULL,
+  startHour INTEGER NOT NULL,
+  startMin INTEGER NOT NULL,
+  endHour INTEGER NOT NULL,
+  endMin INTEGER NOT NULL,
+  FOREIGN KEY(business) REFERENCES businessOwner(id)
+);
+
+CREATE TABLE IF NOT EXISTS day(
+  id INTEGER PRIMARY KEY,
+  dayText TEXT NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS workShift(
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  day INTEGER NOT NULL,
+  business INTEGER NOT NULL,
+  shift INTEGER NOT NULL,
+  FOREIGN KEY(day) REFERENCES day(id),
+  FOREIGN KEY(shift) REFERENCES shift(id)
+);
+
+CREATE TABLE IF NOT EXISTS service(
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  business INTEGER NOT NULL,
+  serviceName TEXT NOT NULL,
+  serviceCost NUMERIC,
+  duration INTEGER NOT NULL,
+  FOREIGN KEY(business) REFERENCES businessOwner(id)
+);
+
+CREATE TABLE IF NOT EXISTS work(
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  employee INTEGER NOT NULL,
+  workShift INTEGER NOT NULL,
+  FOREIGN KEY(employee) REFERENCES employee(id),
+  FOREIGN KEY(workShift) REFERENCES workShift(id)
+);
+
+CREATE TABLE IF NOT EXISTS booking (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  customer INTEGER NOT NULL,
+  employee INTEGER NOT NULL,
+  startTime DATETIME NOT NULL,
+  service INTEGER NOT NULL,
+  FOREIGN KEY(customer) REFERENCES customer(id),
+  FOREIGN KEY(employee) REFERENCES employee(id),
+  FOREIGN KEY(service) REFERENCES service(id)
+);
+
+CREATE TABLE IF NOT EXISTS specialisation (
+    employee INTEGER,
+    service INTEGER,
+    PRIMARY KEY (employee, service),
+    FOREIGN KEY(employee) REFERENCES employee(id),
+    FOREIGN KEY(service) REFERENCES service(id)
+);
+
+CREATE TABLE IF NOT EXISTS setup (
+    area TEXT PRIMARY KEY,
+    value INTEGER DEFAULT 0
+);
+

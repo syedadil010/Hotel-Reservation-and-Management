@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<div th:replace="head :: head"></div>
+
+<body>
+	<div th:replace="navbar :: navbar"></div>
+	<div th:replace="bodash :: bodash"></div>
+	<div class="container-fluid">
+        <div th:replace="flash :: flash"></div>
+
+		<div class="container">
+			<h3>Roster and Bookings</h3>
+			<table class="table table-striped rwd-table">
+				<tr>
+					<th th:each="cell : ${tableHeader}" th:utext="${cell.text}"></th>
+				</tr>
+				<tr th:each="row : ${table}">
+					<td class="td-bodash" id="table-heading" th:text="${row.heading}"></td>
+					<td class="td-bodash" th:attr="data-th=${cell.day.getName()}" th:each="cell : ${row.cells}" th:classappend="${cell.status}">
+						<span th:text="${cell.text}"></span>
+						<a class="btn-roster btn-xs" th:each="link : ${cell.employees}" th:classappend="${link.cssClass}" th:href="${link.href}">
+							<span th:utext="${link.text}"></span>
+							<span class="badge" th:text="${link.numBookings}"></span>
+						</a>
+					</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+	<div th:replace="footer :: footer"></div>
+</body>
+</html>

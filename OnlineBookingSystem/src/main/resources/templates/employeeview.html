@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:replace="head :: head"></div>
+<body>
+	<div th:replace="navbar :: navbar"></div>
+	<div th:replace="bodash :: bodash"></div>
+	<div class="container">
+		<h3 th:text="${employee.name}"></h3>
+		<table>
+			<tr>
+				<th>Email</th>
+				<td th:text="${employee.email}"></td>	
+			</tr>
+			<tr>
+				<th>Phone</th>
+				<td th:text="${employee.phone}"></td>	
+			</tr>
+			<tr>
+				<th>Address</th>
+				<td th:text="${employee.address}"></td>	
+			</tr>
+		</table>
+	</div>
+	<div th:replace="footer :: footer"></div>
+</body>
+</html>

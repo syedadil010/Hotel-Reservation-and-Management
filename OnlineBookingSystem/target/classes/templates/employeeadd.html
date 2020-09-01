@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<div th:replace="head :: head"></div>
+<body>
+	<div th:replace="navbar :: navbar"></div>
+	<div th:replace="bodash :: bodash"></div>
+	<div class="container-fluid">
+		<div th:replace="flash :: flash"></div>
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title">Add Employee</h4>
+				</div>
+				<div class="modal-body">
+					<div class="row">
+						<div class="col-md-10 col-md-offset-1">
+							<div class="well">
+								<form method="post" onsubmit="return validateEmployeeServiceCheckboxes()">
+									<p>
+					              		<label>Name</label>
+					              		<input type="text" class="form-control" name="name" pattern="[a-zA-Z\s]{1,50}" title="Must contain only letters, must be at most 50 chracters long" required="required"/>
+						          	</p>
+						          	<p>
+					              		<label>Email</label>
+										<input type="email" class="form-control" name="email" required="required"/>
+									</p>
+									<p>
+										<label>phone</label>
+										<input type="text" class="form-control" name="phone" pattern="^([+]61([ ]{0,1}[0-9]{3}){3})|([0-9]{4}([ ]{0,1}[0-9]{3}){2})$" title="must be an australian phone number, 10 digits starting with a 0" required="required"/>
+									</p>
+									<p>
+										<label>address</label>
+										<input type="text" class="form-control" name="address"
+                                               pattern="^[a-zA-Z0-9, ]+$" title="Must be letters and numbers only"
+                                               required="required"/>
+									</p>
+									<div class="alert alert-danger hidden" id="service-error">
+										<a href="#" class="close" data-dismiss="alert">&times;</a>
+										<strong>Error. </strong> Please choose at least one service
+									</div>
+									<div class="form-group checkbox-group required">
+										<div th:each="service : ${services}" class="form-check">
+											<label class="form-check-label">
+												<input th:value="${service.id}" class="form-check-input"
+                                                       type="checkbox"
+                                                       name="service"
+                                                       />
+                                                <span th:text="${service.serviceName}"></span>
+											</label>
+										</div>
+									</div>
+									<p>
+										<input type="submit" value="Add" class="btn btn-success btn-block"/>
+									</p>
+									<p>
+										<a th:href="@{/businessowner/dashboard}" class="btn btn-info btn-block">Back to dashboard</a>
+									</p>
+
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div th:replace="footer :: footer"></div>
+	<script type="text/javascript" src="/js/validation.js"></script>
+</body>
+</html>

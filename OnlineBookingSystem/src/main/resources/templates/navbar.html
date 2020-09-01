@@ -1,0 +1,26 @@
+<div class="row" th:fragment="navbar">
+	<nav class="navbar navbar-inverse theme">
+	  	<div class="container">
+	    	<div class="navbar-header">
+	    		<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#collapsable_nav" aria-expanded="false">
+			        <span class="sr-only">Toggle navigation</span>
+			        <span class="icon-bar"></span>
+			        <span class="icon-bar"></span>
+			        <span class="icon-bar"></span>
+			      </button>
+                <a href="/dashboard">
+                    <div class="customlogo">
+                    </div>
+                </a>
+	    	</div>
+	    	<div class="collapse navbar-collapse" id="collapsable_nav">
+		    	<form class="navbar-form navbar-right" id="collapsable_nav" action="/logout">
+		       		<button type="submit" class="btn btn-default form-control">
+						<span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>
+						Logout
+					</button>
+		      	</form>
+	    	</div>	
+	  	</div>
+	</nav>
+</div>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:replace="head :: head"></div>
+<body>
+<div class="row" th:fragment="navbar">
+    <nav class="navbar navbar-inverse theme">
+        <div class="container">
+            <a href="/dashboard">
+                <div class="customlogo">
+                </div>
+            </a>
+        </div>
+    </nav>
+</div>
+<div class="container">
+    <div class="row login-flash">
+        <div th:replace="flash :: flash"></div>
+    </div>
+</div>
+<div class="container">
+	<div class="modal-dialog">
+      <div class="modal-content col-md-8 col-md-offset-2">
+          <div class="modal-header">
+              <h4 class="modal-title">Login to OBS</h4>
+          </div>
+          <div class="modal-body">
+              <div class="row">
+                  <div>
+                      <div class="well">
+                          <form th:action="@{/}" method="post" class="form">
+				          	<p>
+			              		<label>Username</label>
+				              	<input type="text" class="form-control" name="username" required="required"/>
+				          	</p>
+				          	<p>
+			              		<label>Password</label>
+			              		<input type="password" class="form-control" name="password" required="required"/>
+				          	</p>
+				          	<p>
+			              		<input type="submit" value="login" class="btn btn-success btn-block"/>
+				          	</p>
+		      			  </form>
+                          <p>Not registered yet? <a th:href="@{/}">Sign up</a> for free</p>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+	</div>
+</div>
+<div th:replace="footer :: footer"></div>
+</body>
+</html>

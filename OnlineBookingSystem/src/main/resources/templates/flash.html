@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:replace="head :: head"></div>
+<body>
+<div class="row" th:fragment="flash">
+	<div class="col-md-6 col-md-offset-3">
+		<div class="alert alert-danger" th:if="${Error}">
+			<a href="#" class="close" data-dismiss="alert">&times;</a>
+			<strong>Error. </strong><span th:text="${Error}"></span>
+		</div>
+		<div class="alert alert-info" th:if="${Message}">
+			<a href="#" class="close" data-dismiss="alert">&times;</a>
+			<strong>Notice. </strong><span th:text="${Message}"></span>
+		</div>
+		<div class="alert alert-warning" th:if="${Warning}">
+			<a href="#" class="close" data-dismiss="alert">&times;</a>
+			<strong>Hmmm sorry. </strong><span th:text="${Warning}"></span>
+		</div>
+	</div>
+</div>
+</body>
+</html>

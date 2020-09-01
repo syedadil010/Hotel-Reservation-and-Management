@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:replace="head :: head"></div>
+<body>
+<div class="row" th:fragment="navbar">
+    <nav class="navbar navbar-inverse">
+        <div class="container">
+            <a class="navbar-brand" href="/dashboard">
+                OBS
+            </a>
+        </div>
+    </nav>
+</div>
+<div class="container">
+    <div class="row login-flash">
+        <div th:replace="flash :: flash"></div>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-8 col-sm-offset-2">
+            <h4>Welcome to OBS!</h4>
+            <p>Thanks for signing up. We've sent you an email with a unique code to authenticate you. Please enter the code below to get started.</p>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="modal-dialog">
+        <div class="modal-content col-md-8 col-md-offset-2">
+            <div class="modal-header">
+                <h4 class="modal-title">Account Verification</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div>
+                        <div class="well">
+                            <form th:action="@{/setup/login}" method="post" class="form">
+                                <p>
+                                    <label>Authentication Code</label>
+                                    <input type="password" class="form-control" name="authenticationKey" required="required"/>
+                                </p>
+                                <p>
+                                    <input type="submit" value="Get Started &raquo;" class="btn btn-success btn-block"/>
+                                </p>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div th:replace="footer :: footer"></div>
+</body>
+</html>
